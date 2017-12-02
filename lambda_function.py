@@ -177,7 +177,7 @@ def process_question(intent):
     elif words[0] == "what":
         speech_output = "nothing"
     else:
-        speech_output = yes_no_responses[random.randint(0, len(yes_no_responses))]
+        speech_output = yes_no_responses[random.randint(0, len(yes_no_responses)-1)]
 
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
