@@ -1,1 +1,1 @@
-QuestionIntent {question|Question} using LITERAL
+QuestionIntent {ask question|Question} using LITERAL
