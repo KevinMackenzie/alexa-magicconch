@@ -75,11 +75,13 @@ def contains_nontrivial_word(word_list, word):
         return False
     
     index = word_list.index(word)
-
+    
+    #return false if word is last in word list
     if index == len(word_list) - 1:
         return False
+    # return false is the last_word is in trivial_words and true if it is absent from trivial_words
     elif index == len(word_list) - 2:
-        last_word = word_list[len(word_list)-1]
+        last_word = word_list[-1]
         return last_word not in trivial_words
     return True
 
