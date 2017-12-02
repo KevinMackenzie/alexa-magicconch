@@ -8,6 +8,7 @@ http://amzn.to/1LGWsLG
 """
 
 from __future__ import print_function
+import random
 
 
 # --------------- Helpers that build all of the responses ----------------------
@@ -122,13 +123,60 @@ def get_color_from_session(intent, session):
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
 
+
+trivial_words = ["something", "what"]
+def contains_nontrivial_word(word_list, word):
+    if not word in word_list:
+        return False
+    
+    index = word_list.index(word)
+
+    if index == len(word_list) - 1:
+        return False
+    elif index == len(word_list) - 2:
+        last_word = word_list[len(word_list)-1]
+        return not last_word in trivial_words
+
+yes_no_responses = ["no", "yes", "try asking again", "i don't think so", "maybe some day"]
+quantity_words = ["many", "much"]
+should_words = ["should", "could", "would", "do"]
 def process_question(intent):
     card_title = intent['name']
     session_attributes = {}
     should_end_session = False
     reprompt_text = "Ask me a question."
+    
 
-    speech_output = "Maybe Some Day"
+    question_text = intent['slots']['Question']['value']
+    speech_output = question_text
+
+    words = question_text.split(' ')
+
+    if len(words) < 2:
+        speech_output = "Try asking again_too_short"
+    elif contains_nontrivial_word(words, "or") or words[0] == "which": #"Which One" case
+        speech_output = "neither"
+    elif words[0] == "when":
+        speech_output = "never"
+    elif words[0] == "where":
+        speech_output = "nowhere"
+    elif words[0] == "how":
+        if words[1] == "about":
+            speech_output = "no"
+        elif words[1] in quantity_words:
+            speech_output = "none"
+        elif words[1] in should_words:
+            speech_output = "don't"
+        else:
+            speech_output = "not very"
+    elif words[0] == "why":
+        speech_output = "because"
+    elif words[0] == "who" or words[1] == "whom":
+        speech_output = "nobody"
+    elif words[0] == "what":
+        speech_output = "nothing"
+    else:
+        speech_output = yes_no_responses[random.randint(0, len(yes_no_responses))]
 
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
