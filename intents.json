@@ -1,19 +1,16 @@
 {
     "intents": [
-      {
-        "intent": "MyColorIsIntent",
+    {
+        "intent": "QuestionIntent",
         "slots": [
-          {
-            "name": "Color",
-            "type": "LIST_OF_COLORS"
-          }
+            {
+                "name": "Question",
+                "type": "AMAZON.LITERAL"
+            }
         ]
-      },
-      {
-        "intent": "WhatsMyColorIntent"
-      },
-      {
+    },
+    {
         "intent": "AMAZON.HelpIntent"
-      }
+    }
     ]
-  }
+}
