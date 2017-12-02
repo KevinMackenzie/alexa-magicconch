@@ -126,7 +126,7 @@ def get_color_from_session(intent, session):
 
 trivial_words = ["something", "what"]
 def contains_nontrivial_word(word_list, word):
-    if not word in word_list:
+    if word not in word_list:
         return False
     
     index = word_list.index(word)
@@ -135,7 +135,8 @@ def contains_nontrivial_word(word_list, word):
         return False
     elif index == len(word_list) - 2:
         last_word = word_list[len(word_list)-1]
-        return not last_word in trivial_words
+        return last_word not in trivial_words
+    return True
 
 yes_no_responses = ["no", "yes", "<prosody rate='40%'>no</prosody>", "try asking again", "i don't think so", "maybe some day"]
 # yes_no_responses = ["<prosody rate='40%'>no</prosody>"]
