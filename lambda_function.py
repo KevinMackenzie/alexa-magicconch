@@ -122,6 +122,17 @@ def get_color_from_session(intent, session):
     return build_response(session_attributes, build_speechlet_response(
         intent['name'], speech_output, reprompt_text, should_end_session))
 
+def process_question(intent):
+    card_title = intent['name']
+    session_attributes = {}
+    should_end_session = False
+    reprompt_text = "Ask me a question."
+
+    speech_output = "Maybe Some Day"
+
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
 
 # --------------- Events ------------------
 
@@ -153,10 +164,8 @@ def on_intent(intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "MyColorIsIntent":
-        return set_color_in_session(intent, session)
-    elif intent_name == "WhatsMyColorIntent":
-        return get_color_from_session(intent, session)
+    if intent_name == "QuestionIntent":
+        return process_question(intent)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
