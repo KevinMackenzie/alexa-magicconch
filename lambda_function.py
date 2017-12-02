@@ -16,8 +16,8 @@ import random
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
     return {
         'outputSpeech': {
-            'type': 'PlainText',
-            'text': output
+            'type': 'SSML',
+            'ssml': "<speak>" + output + "</speak>"
         },
         'card': {
             'type': 'Simple',
@@ -137,7 +137,8 @@ def contains_nontrivial_word(word_list, word):
         last_word = word_list[len(word_list)-1]
         return not last_word in trivial_words
 
-yes_no_responses = ["no", "yes", "try asking again", "i don't think so", "maybe some day"]
+yes_no_responses = ["no", "yes", "<prosody rate='40%'>no</prosody>", "try asking again", "i don't think so", "maybe some day"]
+# yes_no_responses = ["<prosody rate='40%'>no</prosody>"]
 quantity_words = ["many", "much"]
 should_words = ["should", "could", "would", "do"]
 def process_question(intent):
