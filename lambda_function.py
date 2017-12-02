@@ -100,7 +100,7 @@ def process_question(intent):
     words = question_text.split(' ')
 
     if len(words) < 2:
-        speech_output = "Try asking again_too_short"
+        speech_output = "Try asking again"
     elif contains_nontrivial_word(words, "or") or words[0] == "which": #"Which One" case
         speech_output = "neither"
     elif words[0] == "when":
