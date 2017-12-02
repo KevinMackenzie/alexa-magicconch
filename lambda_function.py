@@ -51,8 +51,7 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Welcome to the Magic Conch Shell Emulator. " \
-                    "Please ask me a question ... by asking me a question"
+    speech_output = "I'm the Magic Conch Shell.  Ask me a question"
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "Please ask me a question"
@@ -63,8 +62,7 @@ def get_welcome_response():
 
 def handle_session_end_request():
     card_title = "Session Ended"
-    speech_output = "Thank you for trying the Magic Conch Emulator. " \
-                    "Have a nice day! "
+    speech_output = "Bye"
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
